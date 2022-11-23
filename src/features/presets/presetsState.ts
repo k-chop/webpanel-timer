@@ -1,4 +1,7 @@
-import { atom, selector, useRecoilCallback, useRecoilValue } from "recoil"
+import { atom, useRecoilCallback, useRecoilValue } from "recoil"
+import { recoilPersist } from "recoil-persist"
+
+const { persistAtom } = recoilPersist()
 
 type TimerPreset = {
   duration: number
@@ -13,6 +16,7 @@ const timerPresetsState = atom<TimerPreset[]>({
     { duration: 5000 },
     { duration: 60000000 },
   ],
+  effects_UNSTABLE: [persistAtom],
 })
 
 export const usePresets = () => ({
