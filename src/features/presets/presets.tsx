@@ -1,52 +1,69 @@
-import { toDisplaySec } from "../../util"
 import styles from "./presets.module.scss"
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
-import {
-  Divider,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material"
+import { Divider, List, ListItem, ListItemButton } from "@mui/material"
 import { usePresets, usePresetsUpdater } from "./presetsState"
 import { useEditPresets } from "./use-edit-presets"
+import {
+  closestCenter,
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core"
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
+import { SortablePresetListItem } from "./sortablePresetListItem"
 
 export const Presets = () => {
   const { presets } = usePresets()
-  const { removePresetAt } = usePresetsUpdater()
+  const { save } = useEditPresets()
+  const { reorderPresetOrder } = usePresetsUpdater()
 
-  const { apply, save } = useEditPresets()
+  const sensors = useSensors(useSensor(PointerSensor))
+
+  const handleDragStart = () => {
+    document.body.style.setProperty("cursor", "grabbing")
+  }
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event
+
+    if (over != null && active.id !== over.id) {
+      reorderPresetOrder(active.id as string, over.id as string)
+    }
+
+    document.body.style.setProperty("cursor", "")
+  }
 
   return (
-    <div className={styles.wrapper}>
-      <List dense>
-        <Divider />
-        <ListItem divider>
-          <ListItemButton onClick={save} sx={{ justifyContent: "center" }}>
-            <AddCircleOutlineIcon />
-          </ListItemButton>
-        </ListItem>
-        {presets.map((preset, idx) => (
-          <ListItem
-            key={idx}
-            divider
-            secondaryAction={
-              <IconButton onClick={() => removePresetAt(idx)}>
-                <DeleteForeverIcon />
-              </IconButton>
-            }
-          >
-            <ListItemButton
-              onClick={() => apply(idx)}
-              sx={{ textAlign: "center", fontSize: "large" }}
-            >
-              <ListItemText>{toDisplaySec(preset.duration)}</ListItemText>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
+      <div className={styles.wrapper}>
+        <List dense>
+          <Divider />
+          <ListItem divider>
+            <ListItemButton onClick={save} sx={{ justifyContent: "center" }}>
+              <AddCircleOutlineIcon />
             </ListItemButton>
           </ListItem>
-        ))}
-      </List>
-    </div>
+          <SortableContext
+            items={presets}
+            strategy={verticalListSortingStrategy}
+          >
+            {presets.map((preset) => (
+              <SortablePresetListItem key={preset.id} preset={preset} />
+            ))}
+          </SortableContext>
+          <DragOverlay dropAnimation={null}>
+            <ListItem />
+          </DragOverlay>
+        </List>
+      </div>
+    </DndContext>
   )
 }

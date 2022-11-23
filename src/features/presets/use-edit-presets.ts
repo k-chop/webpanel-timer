@@ -15,8 +15,8 @@ export const useEditPresets = () => {
   const { timerDuration } = useTimerDuration()
 
   const apply = useCallback(
-    (idx: number) => {
-      setCurrentDuration(presets[idx].duration)
+    (id: string) => {
+      setCurrentDuration(presets.find((preset) => preset.id === id)!.duration)
       stopTimer()
     },
     [presets]

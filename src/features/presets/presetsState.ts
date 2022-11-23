@@ -1,9 +1,10 @@
+import { arrayMove } from "@dnd-kit/sortable"
 import { atom, useRecoilCallback, useRecoilValue } from "recoil"
 import { recoilPersist } from "recoil-persist"
 
 const { persistAtom } = recoilPersist()
 
-type TimerPreset = {
+export type TimerPreset = {
   id: string
   duration: number
   youtubeVideoId?: string
@@ -20,13 +21,21 @@ export const usePresets = () => ({
 })
 
 export const usePresetsUpdater = () => ({
-  removePresetAt: useRecoilCallback(
+  removePreset: useRecoilCallback(
     ({ set }) =>
-      (idx: number) =>
+      (id: string) =>
         set(timerPresetsState, (prev) => {
-          const next = [...prev]
-          next.splice(idx, 1)
-          return next
+          return prev.filter((preset) => preset.id !== id)
+        }),
+    []
+  ),
+  reorderPresetOrder: useRecoilCallback(
+    ({ set }) =>
+      (from: string, to: string) =>
+        set(timerPresetsState, (prev) => {
+          const fromIdx = prev.findIndex((t) => t.id === from)
+          const toIdx = prev.findIndex((t) => t.id === to)
+          return arrayMove(prev, fromIdx, toIdx)
         }),
     []
   ),
