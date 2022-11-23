@@ -4,18 +4,14 @@ import { recoilPersist } from "recoil-persist"
 const { persistAtom } = recoilPersist()
 
 type TimerPreset = {
+  id: string
   duration: number
   youtubeVideoId?: string
 }
 
 const timerPresetsState = atom<TimerPreset[]>({
   key: "timerPresetsState",
-  default: [
-    { duration: 60000 },
-    { duration: 180000 },
-    { duration: 5000 },
-    { duration: 60000000 },
-  ],
+  default: [],
   effects_UNSTABLE: [persistAtom],
 })
 
