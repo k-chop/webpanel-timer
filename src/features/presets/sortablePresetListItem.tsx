@@ -1,9 +1,4 @@
-import {
-  ListItem,
-  IconButton,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material"
+import { ListItem, ListItemButton, ListItemText } from "@mui/material"
 import styles from "./presets.module.scss"
 import { toDisplaySec } from "../../util"
 import { TimerPreset, usePresetsUpdater } from "./presetsState"
@@ -11,6 +6,7 @@ import { useEditPresets } from "./use-edit-presets"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { GripHorizontal, Trash2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface SortablePresetListItemProps {
   preset: TimerPreset
@@ -37,9 +33,13 @@ export const SortablePresetListItem = ({
       ref={setNodeRef}
       divider
       secondaryAction={
-        <IconButton onClick={() => removePreset(preset.id)}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => removePreset(preset.id)}
+        >
           <Trash2 />
-        </IconButton>
+        </Button>
       }
       {...attributes}
       style={style}

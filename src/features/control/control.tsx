@@ -1,5 +1,4 @@
 import styles from "./control.module.scss"
-import IconButton from "@mui/material/IconButton"
 import { useTimerState } from "./timer-state"
 import { useMode, useModeUpdater } from "./mode-state"
 import { useControl } from "./use-control"
@@ -12,6 +11,7 @@ import {
   RotateCcw,
   StopCircle,
 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export const Control = () => {
   const { timerState } = useTimerState()
@@ -23,24 +23,36 @@ export const Control = () => {
 
   return (
     <div className={styles.wrapper}>
-      <IconButton
+      <Button
+        variant="ghost"
+        size="icon"
         onClick={toggleMode}
         disabled={timerState !== "stop" || isInvalidTimer}
       >
-        {mode === "edit" ? <CheckCircle size={32} /> : <Pencil size={32} />}
-      </IconButton>
-      <IconButton onClick={play} disabled={isInvalidTimer}>
+        {mode === "edit" ? <CheckCircle size={100} /> : <Pencil size={100} />}
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon-md"
+        onClick={play}
+        disabled={isInvalidTimer}
+      >
         {timerState === "play" ? (
-          <PauseCircle size={48} />
+          <PauseCircle size={100} />
         ) : timerState === "complete" ? (
-          <RotateCcw size={48} />
+          <RotateCcw size={100} />
         ) : (
-          <PlayCircle size={48} />
+          <PlayCircle size={100} />
         )}
-      </IconButton>
-      <IconButton onClick={reset} disabled={timerState === "stop"}>
-        <StopCircle size={32} />
-      </IconButton>
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={reset}
+        disabled={timerState === "stop"}
+      >
+        <StopCircle size={100} />
+      </Button>
     </div>
   )
 }

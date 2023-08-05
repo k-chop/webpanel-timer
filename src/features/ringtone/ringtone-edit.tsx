@@ -1,9 +1,10 @@
 import TextField from "@mui/material/TextField"
-import { IconButton, InputAdornment } from "@mui/material"
+import { InputAdornment } from "@mui/material"
 import { useState } from "react"
 import styles from "./ringtone.module.scss"
 import { useYoutubeId, useYoutubeIdUpdator } from "./youtube-id-state"
 import { RefreshCcw } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export const RingToneEdit = () => {
   const { youtubeId } = useYoutubeId()
@@ -25,9 +26,13 @@ export const RingToneEdit = () => {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={() => updateYoutubeId(text)}>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => updateYoutubeId(text)}
+              >
                 <RefreshCcw />
-              </IconButton>
+              </Button>
             </InputAdornment>
           ),
         }}
