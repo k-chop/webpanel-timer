@@ -1,15 +1,17 @@
 import styles from "./control.module.scss"
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline"
-import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline"
 import IconButton from "@mui/material/IconButton"
-import EditIcon from "@mui/icons-material/Edit"
-import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined"
-import ReplayIcon from "@mui/icons-material/Replay"
-import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined"
 import { useTimerState } from "./timer-state"
 import { useMode, useModeUpdater } from "./mode-state"
 import { useControl } from "./use-control"
 import { useIsInvalidTimer } from "./use-is-invalid-timer"
+import {
+  CheckCircle,
+  PauseCircle,
+  Pencil,
+  PlayCircle,
+  RotateCcw,
+  StopCircle,
+} from "lucide-react"
 
 export const Control = () => {
   const { timerState } = useTimerState()
@@ -25,23 +27,19 @@ export const Control = () => {
         onClick={toggleMode}
         disabled={timerState !== "stop" || isInvalidTimer}
       >
-        {mode === "edit" ? (
-          <CheckCircleOutlineOutlinedIcon fontSize="large" />
-        ) : (
-          <EditIcon fontSize="large" />
-        )}
+        {mode === "edit" ? <CheckCircle size={32} /> : <Pencil size={32} />}
       </IconButton>
       <IconButton onClick={play} disabled={isInvalidTimer}>
         {timerState === "play" ? (
-          <PauseCircleOutlineIcon sx={{ fontSize: "4rem" }} />
+          <PauseCircle size={48} />
         ) : timerState === "complete" ? (
-          <ReplayIcon sx={{ fontSize: "4rem" }} />
+          <RotateCcw size={48} />
         ) : (
-          <PlayCircleOutlineIcon sx={{ fontSize: "4rem" }} />
+          <PlayCircle size={48} />
         )}
       </IconButton>
       <IconButton onClick={reset} disabled={timerState === "stop"}>
-        <StopCircleOutlinedIcon fontSize="large" />
+        <StopCircle size={32} />
       </IconButton>
     </div>
   )

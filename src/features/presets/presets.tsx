@@ -1,5 +1,4 @@
 import styles from "./presets.module.scss"
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
 import { Divider, List, ListItem, ListItemButton } from "@mui/material"
 import { usePresets, usePresetsUpdater } from "./presetsState"
 import { useEditPresets } from "./use-edit-presets"
@@ -14,6 +13,7 @@ import {
 } from "@dnd-kit/core"
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { SortablePresetListItem } from "./sortablePresetListItem"
+import { PlusCircle } from "lucide-react"
 
 export const Presets = () => {
   const { presets } = usePresets()
@@ -48,7 +48,7 @@ export const Presets = () => {
           <Divider />
           <ListItem divider>
             <ListItemButton onClick={save} sx={{ justifyContent: "center" }}>
-              <AddCircleOutlineIcon />
+              <PlusCircle />
             </ListItemButton>
           </ListItem>
           <SortableContext

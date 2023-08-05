@@ -7,11 +7,10 @@ import {
 import styles from "./presets.module.scss"
 import { toDisplaySec } from "../../util"
 import { TimerPreset, usePresetsUpdater } from "./presetsState"
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
-import DragHandle from "@mui/icons-material/DragHandle"
 import { useEditPresets } from "./use-edit-presets"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import { GripHorizontal, Trash2 } from "lucide-react"
 
 interface SortablePresetListItemProps {
   preset: TimerPreset
@@ -39,14 +38,14 @@ export const SortablePresetListItem = ({
       divider
       secondaryAction={
         <IconButton onClick={() => removePreset(preset.id)}>
-          <DeleteForeverIcon />
+          <Trash2 />
         </IconButton>
       }
       {...attributes}
       style={style}
     >
       <div {...listeners}>
-        <DragHandle className={styles.draggable} />
+        <GripHorizontal className={styles.draggable} />
       </div>
       <ListItemButton
         onClick={() => apply(preset.id)}

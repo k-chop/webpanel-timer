@@ -1,9 +1,8 @@
 import { disp, msToHour, msToMin, msToSec, textSizes } from "../util"
 import styles from "./timer.module.scss"
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import { useTimerDuration } from "../states/timer-duration-state"
 import { useTimerEdit } from "./use-timer-edit"
+import { ChevronDown, ChevronUp } from "lucide-react"
 
 export const TimerEdit = () => {
   const { timerDuration } = useTimerDuration()
@@ -14,15 +13,15 @@ export const TimerEdit = () => {
   return (
     <div className={styles.editWrapper}>
       <div onClick={() => calc("+", "hour")}>
-        <KeyboardArrowUpIcon fontSize="medium" />
+        <ChevronUp />
       </div>
       <div></div>
       <div onClick={() => calc("+", "minute")}>
-        <KeyboardArrowUpIcon fontSize="medium" />
+        <ChevronUp />
       </div>
       <div></div>
       <div onClick={() => calc("+", "second")}>
-        <KeyboardArrowUpIcon fontSize="medium" />
+        <ChevronUp />
       </div>
       <div style={{ fontSize }} onWheel={wheel("hour")}>
         {disp(msToHour(timerDuration), true)}
@@ -36,15 +35,15 @@ export const TimerEdit = () => {
         {disp(msToSec(timerDuration), true)}
       </div>
       <div onClick={() => calc("-", "hour")}>
-        <KeyboardArrowDownIcon fontSize="medium" />
+        <ChevronDown />
       </div>
       <div></div>
       <div onClick={() => calc("-", "minute")}>
-        <KeyboardArrowDownIcon fontSize="medium" />
+        <ChevronDown />
       </div>
       <div></div>
       <div onClick={() => calc("-", "second")}>
-        <KeyboardArrowDownIcon fontSize="medium" />
+        <ChevronDown />
       </div>
     </div>
   )
