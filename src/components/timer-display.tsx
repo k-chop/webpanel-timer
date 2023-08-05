@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
-import { usePausedDuration } from "../features/control/paused-duration-state"
 import { useTargetTime } from "../features/control/target-time-state"
-import {
-  useTimerState,
-  useTimerStateUpdater,
-} from "../features/control/timer-state"
+import { useTimerState } from "../features/control/timer-state"
 import { useRequestAnimationFrame } from "../hooks/use-raf"
 import { useTimerDuration } from "../states/timer-duration-state"
 import {
@@ -12,7 +8,6 @@ import {
   toDisplayMilliSec,
   toDisplaySec,
 } from "../util"
-import styles from "./timer.module.scss"
 import { useCompleteTimer } from "./use-complete-timer"
 import { useDisplayTime } from "./use-display-time"
 
@@ -39,11 +34,9 @@ function TimerDisplay() {
   const fontSize = getFontSizeFromDuration(displayTime)
 
   return (
-    <div className={styles.displayWrapper} style={{ fontSize }}>
-      <span className={styles.timerMain}>{toDisplaySec(displayTime)}</span>
-      <span className={styles.timerMsec}>
-        .{toDisplayMilliSec(displayTime)}
-      </span>
+    <div className="leading-[50vw]" style={{ fontSize }}>
+      <span>{toDisplaySec(displayTime)}</span>
+      <span className="text-[20%]">.{toDisplayMilliSec(displayTime)}</span>
     </div>
   )
 }

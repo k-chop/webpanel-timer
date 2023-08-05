@@ -1,5 +1,4 @@
 import { disp, msToHour, msToMin, msToSec, textSizes } from "../util"
-import styles from "./timer.module.scss"
 import { useTimerDuration } from "../states/timer-duration-state"
 import { useTimerEdit } from "./use-timer-edit"
 import { ChevronDown, ChevronUp } from "lucide-react"
@@ -11,7 +10,7 @@ export const TimerEdit = () => {
   const fontSize = `${textSizes.at(-1)}vw`
 
   return (
-    <div className={styles.editWrapper}>
+    <div className="grid grid-cols-[1fr_0.2fr_1fr_0.2fr_1fr] place-items-center">
       <div onClick={() => calc("+", "hour")}>
         <ChevronUp />
       </div>
