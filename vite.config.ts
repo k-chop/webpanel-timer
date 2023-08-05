@@ -12,11 +12,6 @@ export default defineConfig({
     outDir: "./dist",
   },
   plugins: [react()],
-  css: {
-    modules: {
-      localsConvention: "camelCaseOnly",
-    },
-  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

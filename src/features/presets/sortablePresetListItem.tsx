@@ -1,4 +1,3 @@
-import styles from "./presets.module.scss"
 import { toDisplaySec } from "../../util"
 import { TimerPreset, usePresetsUpdater } from "./presetsState"
 import { useEditPresets } from "./use-edit-presets"
@@ -37,7 +36,7 @@ export const SortablePresetListItem = ({
         className="flex items-center"
       >
         <div {...listeners} className="mx-2">
-          <GripHorizontal className={styles.draggable} />
+          <GripHorizontal className="cursor-grab" />
         </div>
         <div className="flex flex-grow">
           <Button

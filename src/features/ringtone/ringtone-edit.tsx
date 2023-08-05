@@ -1,5 +1,4 @@
 import { useState } from "react"
-import styles from "./ringtone.module.scss"
 import { useYoutubeId, useYoutubeIdUpdator } from "./youtube-id-state"
 import { RefreshCcw } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -17,7 +16,7 @@ export const RingToneEdit = () => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className="mx-3 mb-0 mt-4 flex content-center justify-center">
       <div className="flex w-full max-w-sm flex-col space-x-2">
         <Label htmlFor="youtube-id" className="mb-2">
           Youtube video id

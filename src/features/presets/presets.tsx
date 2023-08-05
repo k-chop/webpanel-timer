@@ -1,4 +1,3 @@
-import styles from "./presets.module.scss"
 import { usePresets, usePresetsUpdater } from "./presetsState"
 import { useEditPresets } from "./use-edit-presets"
 import {
@@ -44,7 +43,7 @@ export const Presets = () => {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className={styles.wrapper}>
+      <div className="mt-4">
         <ul>
           <Separator />
           <li className="flex items-center">

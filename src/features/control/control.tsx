@@ -1,4 +1,3 @@
-import styles from "./control.module.scss"
 import { useTimerState } from "./timer-state"
 import { useMode, useModeUpdater } from "./mode-state"
 import { useControl } from "./use-control"
@@ -22,7 +21,7 @@ export const Control = () => {
   const { play, reset } = useControl()
 
   return (
-    <div className={styles.wrapper}>
+    <div className="mt-4 flex items-center justify-evenly">
       <Button
         variant="ghost"
         size="icon"
