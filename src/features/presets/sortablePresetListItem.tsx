@@ -42,7 +42,7 @@ export const SortablePresetListItem = ({
         <div className="flex flex-grow">
           <Button
             variant="ghost"
-            className="flex-grow"
+            className="text-md flex-grow font-medium"
             onClick={() => apply(preset.id)}
           >
             {toDisplaySec(preset.duration)}
