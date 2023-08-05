@@ -6,7 +6,11 @@ import { useYoutubeId } from "./youtube-id-state"
 const player = YoutubePlayer("player", {
   width: 200,
   height: 200,
-  playerVars: { autoplay: 0, loop: 1 },
+  playerVars: {
+    autoplay: 0,
+    loop: 1,
+    origin: location.protocol + "//" + location.hostname + "/",
+  },
 })
 
 export const RingTone = () => {
