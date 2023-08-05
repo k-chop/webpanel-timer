@@ -5,7 +5,6 @@ import {
 } from "../../states/timer-duration-state"
 import { useTimerStateUpdater } from "../control/timer-state"
 import { usePresets, usePresetsUpdater } from "./presetsState"
-import * as uuid from "uuid"
 
 export const useEditPresets = () => {
   const { presets } = usePresets()
@@ -23,7 +22,7 @@ export const useEditPresets = () => {
   )
 
   const save = useCallback(() => {
-    addPreset({ id: uuid.v4(), duration: timerDuration })
+    addPreset({ id: crypto.randomUUID(), duration: timerDuration })
   }, [timerDuration])
 
   return { apply, save }
