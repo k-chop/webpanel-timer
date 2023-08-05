@@ -36,7 +36,7 @@ export const SortablePresetListItem = ({
         style={style}
         className="flex items-center"
       >
-        <div {...listeners}>
+        <div {...listeners} className="mx-2">
           <GripHorizontal className={styles.draggable} />
         </div>
         <div className="flex flex-grow">
@@ -51,6 +51,7 @@ export const SortablePresetListItem = ({
         <Button
           variant="ghost"
           size="icon"
+          className="mx-2"
           onClick={() => removePreset(preset.id)}
         >
           <Trash2 />
