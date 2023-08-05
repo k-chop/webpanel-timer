@@ -14,6 +14,7 @@ import {
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { SortablePresetListItem } from "./sortablePresetListItem"
 import { PlusCircle } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
 
 export const Presets = () => {
   const { presets } = usePresets()
@@ -45,12 +46,13 @@ export const Presets = () => {
     >
       <div className={styles.wrapper}>
         <List dense>
-          <Divider />
-          <ListItem divider>
+          <Separator />
+          <ListItem>
             <ListItemButton onClick={save} sx={{ justifyContent: "center" }}>
               <PlusCircle />
             </ListItemButton>
           </ListItem>
+          <Separator />
           <SortableContext
             items={presets}
             strategy={verticalListSortingStrategy}

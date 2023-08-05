@@ -7,6 +7,7 @@ import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { GripHorizontal, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 
 interface SortablePresetListItemProps {
   preset: TimerPreset
@@ -29,30 +30,32 @@ export const SortablePresetListItem = ({
   }
 
   return (
-    <ListItem
-      ref={setNodeRef}
-      divider
-      secondaryAction={
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => removePreset(preset.id)}
-        >
-          <Trash2 />
-        </Button>
-      }
-      {...attributes}
-      style={style}
-    >
-      <div {...listeners}>
-        <GripHorizontal className={styles.draggable} />
-      </div>
-      <ListItemButton
-        onClick={() => apply(preset.id)}
-        sx={{ textAlign: "center", fontSize: "large" }}
+    <>
+      <ListItem
+        ref={setNodeRef}
+        secondaryAction={
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => removePreset(preset.id)}
+          >
+            <Trash2 />
+          </Button>
+        }
+        {...attributes}
+        style={style}
       >
-        <ListItemText>{toDisplaySec(preset.duration)}</ListItemText>
-      </ListItemButton>
-    </ListItem>
+        <div {...listeners}>
+          <GripHorizontal className={styles.draggable} />
+        </div>
+        <ListItemButton
+          onClick={() => apply(preset.id)}
+          sx={{ textAlign: "center", fontSize: "large" }}
+        >
+          <ListItemText>{toDisplaySec(preset.duration)}</ListItemText>
+        </ListItemButton>
+      </ListItem>
+      <Separator />
+    </>
   )
 }
