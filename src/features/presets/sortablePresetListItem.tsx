@@ -1,4 +1,3 @@
-import { ListItem, ListItemButton, ListItemText } from "@mui/material"
 import styles from "./presets.module.scss"
 import { toDisplaySec } from "../../util"
 import { TimerPreset, usePresetsUpdater } from "./presetsState"
@@ -31,30 +30,32 @@ export const SortablePresetListItem = ({
 
   return (
     <>
-      <ListItem
+      <li
         ref={setNodeRef}
-        secondaryAction={
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => removePreset(preset.id)}
-          >
-            <Trash2 />
-          </Button>
-        }
         {...attributes}
         style={style}
+        className="flex items-center"
       >
         <div {...listeners}>
           <GripHorizontal className={styles.draggable} />
         </div>
-        <ListItemButton
-          onClick={() => apply(preset.id)}
-          sx={{ textAlign: "center", fontSize: "large" }}
+        <div className="flex flex-grow">
+          <Button
+            variant="ghost"
+            className="flex-grow"
+            onClick={() => apply(preset.id)}
+          >
+            {toDisplaySec(preset.duration)}
+          </Button>
+        </div>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => removePreset(preset.id)}
         >
-          <ListItemText>{toDisplaySec(preset.duration)}</ListItemText>
-        </ListItemButton>
-      </ListItem>
+          <Trash2 />
+        </Button>
+      </li>
       <Separator />
     </>
   )

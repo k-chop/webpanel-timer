@@ -1,5 +1,4 @@
 import styles from "./presets.module.scss"
-import { Divider, List, ListItem, ListItemButton } from "@mui/material"
 import { usePresets, usePresetsUpdater } from "./presetsState"
 import { useEditPresets } from "./use-edit-presets"
 import {
@@ -15,6 +14,7 @@ import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { SortablePresetListItem } from "./sortablePresetListItem"
 import { PlusCircle } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button"
 
 export const Presets = () => {
   const { presets } = usePresets()
@@ -45,13 +45,13 @@ export const Presets = () => {
       onDragEnd={handleDragEnd}
     >
       <div className={styles.wrapper}>
-        <List dense>
+        <ul>
           <Separator />
-          <ListItem>
-            <ListItemButton onClick={save} sx={{ justifyContent: "center" }}>
+          <li className="flex items-center">
+            <Button variant="ghost" className="flex-grow" onClick={save}>
               <PlusCircle />
-            </ListItemButton>
-          </ListItem>
+            </Button>
+          </li>
           <Separator />
           <SortableContext
             items={presets}
@@ -62,9 +62,9 @@ export const Presets = () => {
             ))}
           </SortableContext>
           <DragOverlay dropAnimation={null}>
-            <ListItem />
+            <li />
           </DragOverlay>
-        </List>
+        </ul>
       </div>
     </DndContext>
   )
