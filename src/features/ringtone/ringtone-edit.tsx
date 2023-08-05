@@ -1,10 +1,10 @@
-import TextField from "@mui/material/TextField"
-import { InputAdornment } from "@mui/material"
 import { useState } from "react"
 import styles from "./ringtone.module.scss"
 import { useYoutubeId, useYoutubeIdUpdator } from "./youtube-id-state"
 import { RefreshCcw } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export const RingToneEdit = () => {
   const { youtubeId } = useYoutubeId()
@@ -18,25 +18,26 @@ export const RingToneEdit = () => {
 
   return (
     <div className={styles.wrapper}>
-      <TextField
-        id="youtube-id"
-        label="Youtube video id"
-        defaultValue={youtubeId}
-        onChange={(ev) => setText(ev.target.value)}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => updateYoutubeId(text)}
-              >
-                <RefreshCcw />
-              </Button>
-            </InputAdornment>
-          ),
-        }}
-      />
+      <div className="flex w-full max-w-sm flex-col space-x-2">
+        <Label htmlFor="youtube-id" className="mb-2">
+          Youtube video id
+        </Label>
+        <div className="flex max-w-sm items-center">
+          <Input
+            type="url"
+            defaultValue={youtubeId}
+            onChange={(ev) => setText(ev.target.value)}
+          />
+          <Button
+            id="youtube-id"
+            variant="ghost"
+            size="icon"
+            onClick={() => updateYoutubeId(text)}
+          >
+            <RefreshCcw />
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }
